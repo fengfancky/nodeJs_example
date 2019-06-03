@@ -19,7 +19,7 @@ function handler(req,res){
 io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
-        socket.emit('serverMessage','你 : '+content);
+        socket.emit('serverMessage','我 : '+content);
         socket.broadcast.emit('serverMessage',keyNameId[socket.id]+ ' : ' +content);
     });
 
