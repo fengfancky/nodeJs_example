@@ -16,12 +16,10 @@ function handler(req,res){
             res.end(data);
         }
     });
-   
 }
 
 io.sockets.on('connection',function(socket){
-
-    console.log('connection......');
+    console.log('connection......')
     socket.on('clientMessage',function(content){
         socket.emit('serverMessage','你 : '+content);
         socket.broadcast.emit('serverMessage',keyNameId[socket.id]+ ' : ' +content);
