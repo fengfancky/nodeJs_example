@@ -21,7 +21,7 @@
         <input type="text" id ="input"/>
         <div id="messages"></div>
 
-        <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+        <script src="http://119.23.60.190:4000/socket.io/socket.io.js"></script>
         <script type="text/javascript">
             var messagesElement = document.getElementById("messages");
             var lastMessagesElement = null;
@@ -35,7 +35,7 @@
                 lastMessagesElement = newMessageElement;
             }
 
-            var socket = io.connect('http://localhost:4000');
+            var socket = io.connect('http://119.23.60.190:4000');
 
             socket.on('serverMessage',function(content){
                 addMessages(content);
