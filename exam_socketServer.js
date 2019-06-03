@@ -19,6 +19,8 @@ function handler(req,res){
 }
 
 io.sockets.on('connection',function(socket){
+    
+    console.log('connection......');
     socket.on('clientMessage',function(content){
         socket.emit('serverMessage','你 : '+content);
         socket.broadcast.emit('serverMessage',keyNameId[socket.id]+ ' : ' +content);
