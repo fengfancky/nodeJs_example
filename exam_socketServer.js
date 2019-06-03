@@ -7,17 +7,16 @@ httpd.listen(4000);
 var keyNameId = {};
 
 function handler(req,res){
-    // fs.readFile(__dirname+'/index.html',function(err,data){
-    //     if(err){
-    //         res.writeHead(500);
-    //         return res.end('Error loading index.html');
-    //     }else{
-    //         res.writeHead(200);
-    //         res.end(data);
-    //     }
-    // });
-    res.writeHead(200,{'Content-Type':'text/plain'});
-    res.end('Chat Room');
+    fs.readFile(__dirname+'/index.html',function(err,data){
+        if(err){
+            res.writeHead(500);
+            return res.end('Error loading index.html');
+        }else{
+            res.writeHead(200);
+            res.end(data);
+        }
+    });
+   
 }
 
 io.sockets.on('connection',function(socket){
