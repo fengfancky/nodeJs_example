@@ -1,10 +1,13 @@
 <html>
-    <head>
-        <title>Node.js Socket chat</title>
+    <head >
+        <meta charset="UTF-8">
+        <title>聊天室</title>
         <style type="text/css">
+
             #input{
                 width:200px;
             }
+
             #messages{
                 position: fixed;
                 top:40px;
@@ -14,10 +17,12 @@
                 border: 1px solid #EEEEEE;
                 padding: 8px;
             }
+            
         </style>
     </head>
     <body>
-        Your messages:
+
+        输入消息 : 
         <input type="text" id ="input"/>
         <div id="messages"></div>
 
@@ -31,7 +36,7 @@
                 var newMessageText = document.createTextNode(message);
 
                 newMessageElement.appendChild(newMessageText);
-                messagesElement.insertBefore(newMessageElement,lastMessagesElement);
+                messagesElement.appendChild(newMessageElement,lastMessagesElement);
                 lastMessagesElement = newMessageElement;
             }
 
@@ -42,7 +47,7 @@
             });
 
             socket.on('login',function(){
-                var username = prompt('What username would you like to use ?');
+                var username = prompt('请输入你的昵称：');
                 socket.emit('login',username);
             });
 

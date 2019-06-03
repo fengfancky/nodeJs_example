@@ -7,19 +7,17 @@ httpd.listen(4000);
 var keyNameId = {};
 
 function handler(req,res){
-    fs.readFile(__dirname+'/index.html',function(err,data){
-        if(err){
-            res.writeHead(500);
-            return res.end('Error loading index.html');
-        }else{
-            res.writeHead(200);
-            res.end(data);
-        }
-    });
+
+    if(req.url == '/example'){
+        res.writeHead(200,{'Content-Type':'text/html'});
+        var data = fs.readFileSync('clientSocket.html');
+        res.end(data);
+    }
+   
 }
 
 io.sockets.on('connection',function(socket){
-    console.log('connection......')
+
     socket.on('clientMessage',function(content){
         socket.emit('serverMessage','你 : '+content);
         socket.broadcast.emit('serverMessage',keyNameId[socket.id]+ ' : ' +content);
@@ -29,7 +27,7 @@ io.sockets.on('connection',function(socket){
     socket.on('login',function(username){
         
         keyNameId[socket.id] = username;
-        socket.emit('serverMessage','您已加入聊天室');
+        socket.emit('serverMessage','已加入聊天室');
         socket.broadcast.emit('serverMessage', username +' 加入聊天室');
 
     });
