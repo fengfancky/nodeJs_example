@@ -18,6 +18,7 @@
                 right: 20px;
                 border: 1px solid #666666;
                 padding: 50px;
+                background: #AAAAAA;
             }
         </style>
     </head>
@@ -27,18 +28,61 @@
         <input type="text" id ="input"/>
         <div id="messages"></div>
 
+        <!-- 119.23.60.190 -->
         <script src="http://119.23.60.190:4000/socket.io/socket.io.js"></script>
         <script type="text/javascript">
             var messagesElement = document.getElementById("messages");
             var lastMessagesElement = null;
 
+            
+            // 添加用户输入的消息
             function addMessages(message){
+
+                var newDiv = document.createElement('div');
                 var newMessageElement = document.createElement('div');
-                var newMessageText = document.createTextNode(message);
+               
+                var newMessageText ='';
+
+                if(message.current){
+                    newMessageText = document.createTextNode(message.value);
+                    newMessageElement.style.background = '#68b247';
+                    newDiv.style.textAlign = 'left';
+                }else{
+                    newMessageText = document.createTextNode(message.name+' : '+message.value);
+                    newMessageElement.style.background = '#FFFFFF';
+                    newDiv.style.textAlign = 'right';
+                }
+                
+                newMessageElement.style.borderRadius = '5px';
+                newMessageElement.style.display = 'inline';
+                newMessageElement.style.padding = '10px';
 
                 newMessageElement.appendChild(newMessageText);
-                messagesElement.appendChild(newMessageElement,lastMessagesElement);
-                lastMessagesElement = newMessageElement;
+
+                newDiv.appendChild(newMessageElement);
+                newDiv.style.margin = '30px';
+                messagesElement.appendChild(newDiv,lastMessagesElement);
+                lastMessagesElement = newDiv;
+            }
+
+             // 添加用户输入的消息
+            function addTipMessages(message){
+               
+                var newDiv = document.createElement('div');
+
+                var newMessageElement = document.createElement('div');
+                var newMessageText = document.createTextNode(message);
+                newMessageElement.appendChild(newMessageText);
+                newMessageElement.style.borderRadius = '5px';
+                newMessageElement.style.display = 'inline';
+                newMessageElement.style.paddingBottom = '10px';
+                newMessageElement.style.color = '#EEEEEE';
+                newMessageElement.style.textSize = '10px';
+
+                newDiv.appendChild(newMessageElement);
+                newDiv.style.margin = '30px';
+                messagesElement.appendChild(newDiv,lastMessagesElement);
+                lastMessagesElement = newDiv;
             }
 
             var socket = io.connect('http://119.23.60.190:4000');
@@ -47,9 +91,19 @@
                 addMessages(content);
             });
 
+            socket.on('serverTipMessage',function(content){
+                addTipMessages(content);
+            });
+
             socket.on('login',function(){
                 var username = prompt('请输入你的昵称：');
-                socket.emit('login',username);
+                if(username!= null & username.trim() != ''){
+                    socket.emit('login',username);
+                }else{
+                    socket.emit('login');
+                }
+
+                
             });
 
             var inputElement = document.getElementById('input');
