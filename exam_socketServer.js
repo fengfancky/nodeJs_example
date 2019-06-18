@@ -16,11 +16,22 @@ function handler(req,res){
    
 }
 
+function getValue(obj,to){
+    for(var key in obj){
+        if(obj[key] == to){
+            return key;
+        }
+    }
+}
+
+
 io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
-        socket.emit('serverMessage',content);
+        // socket.emit('serverMessage',content);
         // socket.broadcast.emit('serverMessage',content);
+
+        io.sockets.socket(getValue(keyNameId,"TV")).emit('serverMessage',content);
     });
 
 
@@ -32,8 +43,8 @@ io.sockets.on('connection',function(socket){
             keyNameId[socket.id] = username;
         }
         
-        socket.emit('serverTipMessage','你已加入聊天');
-        socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
+        // socket.emit('serverTipMessage','你已加入聊天');
+        // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
         
     });
 
