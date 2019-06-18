@@ -19,8 +19,8 @@ function handler(req,res){
 io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
-        socket.emit('serverMessage',{value:content,current:true,name:keyNameId[socket.id]});
-        socket.broadcast.emit('serverMessage',{value:content,current:false,name:keyNameId[socket.id]});
+        socket.emit('serverMessage',content);
+        socket.broadcast.emit('serverMessage',content);
     });
 
 
