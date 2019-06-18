@@ -20,7 +20,7 @@ io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
         socket.emit('serverMessage',content);
-        socket.broadcast.emit('serverMessage',content);
+        // socket.broadcast.emit('serverMessage',content);
     });
 
 
