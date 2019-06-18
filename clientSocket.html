@@ -86,7 +86,7 @@
                 lastMessagesElement = newDiv;
             }
 
-            var socket = io.connect('http://119.23.60.190:4000');
+            var socket = io.connect('http://119.23.60.190:4001');
 
             socket.on('serverMessage',function(content){
                 addMessages(content);
@@ -95,6 +95,7 @@
             socket.on('serverTipMessage',function(content){
                 addTipMessages(content);
             });
+            
 
             socket.on('login',function(){
                 var username = prompt('请输入你的昵称：');
@@ -103,8 +104,6 @@
                 }else{
                     socket.emit('login');
                 }
-
-                
             });
 
             var inputElement = document.getElementById('input');
