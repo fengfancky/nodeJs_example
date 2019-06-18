@@ -19,28 +19,28 @@ function handler(req,res){
 io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
-        socket.emit('serverMessage',{value:content,current:true,name:keyNameId[socket.id]});
-        socket.broadcast.emit('serverMessage',{value:content,current:false,name:keyNameId[socket.id]});
+        socket.emit('serverMessage',content);
+        socket.broadcast.emit('serverMessage',content);
     });
 
 
     socket.on('login',function(username){
         
-        if(username == null){
-            keyNameId[socket.id] = socket.id;
-        }else{
-            keyNameId[socket.id] = username;
-        }
+        // if(username == null){
+        //     keyNameId[socket.id] = socket.id;
+        // }else{
+        //     keyNameId[socket.id] = username;
+        // }
         
         socket.emit('serverTipMessage','你已加入聊天');
         socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
-
+        
     });
 
-    socket.on('disconnect',function(){
-        socket.emit('serverTipMessage','你已退出聊天');
-        socket.broadcast.emit('serverTipMessage', keyNameId[socket.id]+' 退出聊天');
-    });
+    // socket.on('disconnect',function(){
+    //     socket.emit('serverTipMessage','你已退出聊天');
+    //     socket.broadcast.emit('serverTipMessage', keyNameId[socket.id]+' 退出聊天');
+    // });
 
     socket.emit('login');
 })
