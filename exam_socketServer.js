@@ -5,6 +5,7 @@ var fs = require('fs');
 httpd.listen(4001);
 
 var keyNameId = {};
+var socketId ;
 var socketArray = new Array();
 
 function handler(req,res){
@@ -22,14 +23,17 @@ io.sockets.on('connection',function(socket){
 
     socket.on('clientMessage',function(content){
         // socket.emit('serverMessage',content);
-        socket.broadcast.emit('serverMessage',content);
+        // socket.broadcast.emit('serverMessage',content);
+        io.sockets.sockets(socketId).emit('serverMessage',content);
     });
 
 
     socket.on('login',function(username){
         socket.emit('serverTipMessage','你已加入聊天');
         socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
-        
+        if(username === "TV"){
+            socketId = socket.id;
+        }
     });
 
     socket.on('disconnect',function(){
