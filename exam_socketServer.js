@@ -24,7 +24,7 @@ io.sockets.on('connection',function(socket){
     socket.on('clientMessage',function(content){
         // socket.emit('serverMessage',content);
         // socket.broadcast.emit('serverMessage',content);
-        io.sockets.sockets(socketId).emit('serverMessage',content);
+        io.to(socketId).emit('serverMessage',content);
     });
 
 
