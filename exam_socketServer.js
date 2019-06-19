@@ -20,7 +20,7 @@ function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
         console.log(socketArray[i].username)
-        if(data.username == name){
+        if(socketArray[i].username == name){
             socketId = data.id;
             break;
         }
