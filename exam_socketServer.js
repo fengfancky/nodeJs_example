@@ -64,14 +64,14 @@ io.sockets.on('connection',function(socket){
     socket.on('login',function(username){
         // socket.emit('serverTipMessage','你已加入聊天');
         // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
-        // if(!isInArray(username)){
-        //     var data = {id:socket.id,name:username};
-        //     socketArray.push(data);
-        // }
-
+        if(!isInArray(username)){
+            var data = {id:socket.id,name:username};
+            socketArray.push(data);
+        }
         console.log(isInArray(username))
-        var data = {id:socket.id,name:username};
-        socketArray.push(data);
+        // console.log(isInArray(username))
+        // var data = {id:socket.id,name:username};
+        // socketArray.push(data);
         
     });
 
