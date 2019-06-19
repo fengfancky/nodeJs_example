@@ -35,6 +35,8 @@ io.sockets.on('connection',function(socket){
         // socket.broadcast.emit('serverMessage',content);
         console.log(content)
         getTargetSocketId(content.targetUser)
+
+        console.log(socketId);
         
         if(socketId !='' & socketId!=null){
             io.to(socketId).emit('serverMessage',content.msg);
@@ -51,6 +53,7 @@ io.sockets.on('connection',function(socket){
         // socket.emit('serverTipMessage','你已加入聊天');
         // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
         var data = {id:socket.id,name:username};
+        console.log(data);
         socketArray.push(data);
 
         // if(username === "TV"){
