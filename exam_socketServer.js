@@ -17,9 +17,9 @@ function handler(req,res){
 }
 
 function getTargetSocketId(name){
-    console.log(socketArray);
-    for(var data in socketArray){
-        console.log(data)
+    
+    for(var i =0;i<socketArray.length;i++){
+        console.log(socketArray[i].username)
         if(data.username == name){
             socketId = data.id;
             break;
@@ -36,7 +36,6 @@ io.sockets.on('connection',function(socket){
         // socket.broadcast.emit('serverMessage',content);
        
         getTargetSocketId(content.targetUser)
-        console.log("socketId "+socketId);
         
         if(socketId !='' & socketId!=null){
             io.to(socketId).emit('serverMessage',content.msg);
@@ -55,15 +54,10 @@ io.sockets.on('connection',function(socket){
         var data = {id:socket.id,name:username};
         
         socketArray.push(data);
-
-        // if(username === "TV"){
-        //     socketId = socket.id;
-        // }
     });
 
     socket.on('disconnect',function(){
         socket.emit('serverTipMessage','你已退出聊天');
-        // socket.broadcast.emit('serverTipMessage', keyNameId[socket.id]+' 退出聊天');
     });
 
     socket.emit('login');
