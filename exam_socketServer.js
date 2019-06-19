@@ -19,9 +19,10 @@ function handler(req,res){
 function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
-        console.log(socketArray[i].name)
-        if(socketArray[i].name == name){
-            socketId = data.id;
+        var socket = socketArray[i];
+        // console.log(socket.name)
+        if(socket.name == name){
+            socketId = socket.id;
             break;
         }
     }
@@ -52,7 +53,6 @@ io.sockets.on('connection',function(socket){
         // socket.emit('serverTipMessage','你已加入聊天');
         // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
         var data = {id:socket.id,name:username};
-        
         socketArray.push(data);
     });
 
