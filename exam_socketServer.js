@@ -19,8 +19,8 @@ function handler(req,res){
 function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
-        console.log(socketArray[i].username)
-        if(socketArray[i].username == name){
+        console.log(socketArray[i].name)
+        if(socketArray[i].name == name){
             socketId = data.id;
             break;
         }
