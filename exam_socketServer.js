@@ -21,6 +21,7 @@ function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
         var socket = socketArray[i];
+        console.log("socket:"+socket.name)
         if(socket.name == name){
             socketId = socket.id;
             break;
@@ -33,7 +34,7 @@ function getTargetSocketId(name){
 function isInArray(name){
 
     for(var j=0;j<socketArray.length;j++){
-        var socket = socketArray[i];
+        var socket = socketArray[j];
         if(socket.name == name){
             return true;
         }
