@@ -31,17 +31,14 @@ function getTargetSocketId(name){
 }
 
 //判断用户是否已经添加到数组中
-function isInArray(name){
-
+function isInArray(name,data){
     for(var j=0;j<socketArray.length;j++){
         var socket = socketArray[j];
         if(socket.name == name){
-            return true;
+            socketArray[j] = data;
+            break;
         }
     }
-
-    return false;
-
 }
 
 
@@ -64,14 +61,9 @@ io.sockets.on('connection',function(socket){
     socket.on('login',function(username){
         // socket.emit('serverTipMessage','你已加入聊天');
         // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
-        if(!isInArray(username)){
-            var data = {id:socket.id,name:username};
-            socketArray.push(data);
-        }
-        console.log(isInArray(username))
-        // console.log(isInArray(username))
-        // var data = {id:socket.id,name:username};
-        // socketArray.push(data);
+        var data = {id:socket.id,name:username};
+        isInArray(username,data);
+        socketArray.push(data);
         
     });
 
