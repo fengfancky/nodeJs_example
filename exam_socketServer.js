@@ -69,7 +69,6 @@ io.sockets.on('connection',function(socket){
 
     socket.on('disconnect',function(){
         socket.emit('serverTipMessage','你已退出聊天');
-        socket.
     });
 
     socket.emit('login');
