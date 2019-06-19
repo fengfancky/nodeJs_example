@@ -34,9 +34,10 @@ io.sockets.on('connection',function(socket){
         // socket.emit('serverMessage',content);
         // socket.broadcast.emit('serverMessage',content);
         console.log(content)
+        getTargetSocketId(content.targetUser)
         
         if(socketId !='' & socketId!=null){
-            io.to(socketId).emit('serverMessage',content);
+            io.to(socketId).emit('serverMessage',content.msg);
         }else{
             socket.emit('serverMessage','无此用户');
         }
