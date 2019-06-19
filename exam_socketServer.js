@@ -21,7 +21,7 @@ function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
         var socket = socketArray[i];
-        console.log("socket:"+socket.name)
+        
         if(socket.name == name){
             socketId = socket.id;
             break;
@@ -69,6 +69,7 @@ io.sockets.on('connection',function(socket){
 
     socket.on('disconnect',function(){
         socket.emit('serverTipMessage','你已退出聊天');
+        socket.
     });
 
     socket.emit('login');
