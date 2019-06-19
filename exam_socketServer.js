@@ -4,7 +4,7 @@ var fs = require('fs');
 
 httpd.listen(4001);
 
-var socketId = "";
+var socketId = '';
 var socketArray = new Array();
 
 function handler(req,res){
@@ -36,7 +36,7 @@ io.sockets.on('connection',function(socket){
         // socket.emit('serverMessage',content);
         // socket.broadcast.emit('serverMessage',content);
        
-        console.log("content:"+content)
+        console.log("content:"+content.targetUser)
         getTargetSocketId(content.targetUser)
         
         if(socketId !='' & socketId!=null){
