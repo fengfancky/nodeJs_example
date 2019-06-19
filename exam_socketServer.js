@@ -20,7 +20,6 @@ function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
         var socket = socketArray[i];
-        console.log(socket.name)
         if(socket.name == name){
             socketId = socket.id;
             break;
@@ -36,7 +35,6 @@ io.sockets.on('connection',function(socket){
         // socket.emit('serverMessage',content);
         // socket.broadcast.emit('serverMessage',content);
        
-        console.log("content:"+content.targetUser)
         getTargetSocketId(content.targetUser)
         
         if(socketId !='' & socketId!=null){
@@ -44,9 +42,6 @@ io.sockets.on('connection',function(socket){
         }else{
             socket.emit('serverMessage','无此用户');
         }
-
-
-        
     });
 
 
