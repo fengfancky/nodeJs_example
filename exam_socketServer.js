@@ -16,6 +16,7 @@ function handler(req,res){
     }
 }
 
+//根据 name 获取socket的id
 function getTargetSocketId(name){
     
     for(var i =0;i<socketArray.length;i++){
@@ -25,6 +26,20 @@ function getTargetSocketId(name){
             break;
         }
     }
+
+}
+
+//判断用户是否已经添加到数组中
+function isInArray(name){
+
+    for(var j=0;j<socketArray.length;j++){
+        var socket = socketArray[i];
+        if(socket.name == name){
+            return true;
+        }
+    }
+
+    return false;
 
 }
 
@@ -48,8 +63,11 @@ io.sockets.on('connection',function(socket){
     socket.on('login',function(username){
         // socket.emit('serverTipMessage','你已加入聊天');
         // socket.broadcast.emit('serverTipMessage', username +' 加入聊天');
-        var data = {id:socket.id,name:username};
-        socketArray.push(data);
+        if(!isInArray(username)){
+            var data = {id:socket.id,name:username};
+            socketArray.push(data);
+        }
+        
     });
 
     socket.on('disconnect',function(){
